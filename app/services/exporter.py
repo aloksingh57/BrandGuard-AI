@@ -87,11 +87,13 @@ def generate_excel_issues_summary(version: ContentVersion) -> io.BytesIO:
         ws.cell(row=row_num, column=9, value=iss.improved_text or iss.suggestion)
         
         status_cell = ws.cell(row=row_num, column=10, value=iss.status)
-        status_cell.alignment = Alignment(horizontal="center", bold=True)
+        status_cell.alignment = Alignment(horizontal="center")
         if iss.status == 'Accepted':
             status_cell.font = Font(color="15803D", bold=True)
         elif iss.status == 'Rejected':
             status_cell.font = Font(color="B91C1C", bold=True)
+        else:
+            status_cell.font = Font(bold=True)
 
         ws.cell(row=row_num, column=11, value=iss.reviewer_comment or "-")
 

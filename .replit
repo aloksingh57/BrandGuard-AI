@@ -1,0 +1,9 @@
+run = "PORT=3000 python3 app.py"
+entrypoint = "app.py"
+
+[env]
+PORT = "3000"
+
+[[ports]]
+localPort = 3000
+externalPort = 80

@@ -2,41 +2,205 @@
 
 {% block title %}BrandGuard AI - One Shared Set of Brand Rules{% endblock %}
 
-{% block content %}
-<div style="text-align: center; max-width: 800px; margin: 3rem auto;">
-  <span class="badge badge-info" style="font-size: 0.85rem; padding: 0.4rem 0.8rem; margin-bottom: 1rem;">Content Safety &amp; Brand Consistency</span>
-  <h1 style="font-size: 2.75rem; margin: 0.5rem 0 1rem; color: var(--primary);">Catch brand mistakes before content goes public.</h1>
-  <p style="font-size: 1.2rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 2rem;">
-    One shared set of brand rules, one clear review before publishing. People stay in charge: creators make changes, reviewers make the final decision.
-  </p>
+{% block hero %}
+<section class="editorial-hero" aria-label="BrandGuard AI Introduction">
+  <!-- Subtle topographic contour lines evoking championship private club fairways -->
+  <svg class="editorial-hero-bg" viewBox="0 0 1440 620" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <path d="M-80,520 C240,410 460,610 820,450 C1120,315 1310,410 1520,280" fill="none" stroke="#C5A059" stroke-width="1.2"/>
+    <path d="M-80,450 C260,330 480,540 860,375 C1150,245 1340,330 1520,210" fill="none" stroke="#C5A059" stroke-width="0.9"/>
+    <path d="M-80,380 C300,260 510,465 900,300 C1180,180 1370,260 1520,145" fill="none" stroke="#C5A059" stroke-width="0.65"/>
+    <path d="M-80,590 C280,490 520,660 880,520 C1170,400 1350,470 1520,360" fill="none" stroke="#FAF8F2" stroke-width="0.6" opacity="0.5"/>
+    <circle cx="1180" cy="145" r="185" fill="none" stroke="#C5A059" stroke-width="0.65" opacity="0.55"/>
+    <circle cx="1180" cy="145" r="260" fill="none" stroke="#FAF8F2" stroke-width="0.45" opacity="0.35"/>
+  </svg>
 
-  <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 3rem;">
-    <a href="{{ url_for('auth.login') }}" class="btn btn-primary" style="padding: 0.75rem 1.75rem; font-size: 1.1rem;">Sign In to Review Space</a>
-    <a href="{{ url_for('auth.register') }}" class="btn btn-secondary" style="padding: 0.75rem 1.75rem; font-size: 1.1rem;">Create Account</a>
+  <div class="editorial-hero-inner">
+    <span class="hero-eyebrow">Private Brand Governance &bull; {{ brand_name }} Editorial Standard</span>
+
+    <div class="hero-grid">
+      <div>
+        <h1 class="hero-title">
+          Catch brand mistakes<br>
+          <em>before content goes public.</em>
+        </h1>
+        <p class="hero-subtitle">
+          One shared set of brand rules, one calm and authoritative review before publishing.
+          People remain in charge: creators refine every draft, and designated reviewers render the final verdict.
+        </p>
+        <div class="hero-actions">
+          <a href="{{ url_for('auth.login') }}" class="btn-editorial-gold">
+            Sign In to Review Space <span aria-hidden="true">&rarr;</span>
+          </a>
+          <a href="{{ url_for('auth.register') }}" class="btn-editorial-ghost">
+            Create Account
+          </a>
+        </div>
+      </div>
+
+      <aside class="hero-dossier-card" aria-label="Governance Dossier">
+        <div class="hero-dossier-kicker">The Lumora Charter</div>
+        <p class="hero-dossier-quote">
+          &ldquo;Standards are not meant to slow craft&mdash;they preserve the quiet distinction that defines a lasting brand.&rdquo;
+        </p>
+        <div class="hero-dossier-meta">
+          <div>
+            <strong>06</strong>
+            <span>Review Stages</span>
+          </div>
+          <div>
+            <strong>20</strong>
+            <span>Active Safeguards</span>
+          </div>
+          <div>
+            <strong>100%</strong>
+            <span>Audit Trail</span>
+          </div>
+        </div>
+      </aside>
+    </div>
   </div>
 
-  <div class="grid-3" style="text-align: left; margin-top: 2rem;">
-    <a href="{{ url_for('auth.login', role='creator') }}" class="card card-clickable" aria-label="Sign in as Creator">
-      <div style="font-size: 2.2rem; margin-bottom: 0.5rem;" aria-hidden="true">✍️</div>
-      <h3 class="icon-heading-link">Creators Write &amp; Fix &rarr;</h3>
-      <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 0.5rem;">Upload copy, drafts, or marketing assets. Get instant feedback on banned words, tone, and accuracy.</p>
-      <span class="badge badge-info" style="margin-top: 0.75rem; font-size: 0.75rem;">Try Creator Demo &rarr;</span>
-    </a>
-
-    <a href="{{ url_for('auth.login', role='reviewer') }}" class="card card-clickable" aria-label="Sign in as Reviewer">
-      <div style="font-size: 2.2rem; margin-bottom: 0.5rem;" aria-hidden="true">🛡️</div>
-      <h3 class="icon-heading-link">Reviewers Guard &rarr;</h3>
-      <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 0.5rem;">Review queue with safeguards. Block serious issues, approve clean work, or grant justified exceptions.</p>
-      <span class="badge badge-warning" style="margin-top: 0.75rem; font-size: 0.75rem;">Try Reviewer Demo &rarr;</span>
-    </a>
-
-    <a href="{{ url_for('auth.login', role='manager') }}" class="card card-clickable" aria-label="Sign in as Manager">
-      <div style="font-size: 2.2rem; margin-bottom: 0.5rem;" aria-hidden="true">⚙️</div>
-      <h3 class="icon-heading-link">Managers Guide &rarr;</h3>
-      <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 0.5rem;">Manage brand guidelines, approve facts, colors, and tone, while auditing all team decisions.</p>
-      <span class="badge badge-serious" style="margin-top: 0.75rem; font-size: 0.75rem;">Try Manager Demo &rarr;</span>
-    </a>
+  <div class="hero-ribbon">
+    <div class="hero-ribbon-inner">
+      <span><strong>01</strong> Multi-Format Parsing (PDF, DOCX, PPTX, XLSX, Imagery)</span>
+      <span><strong>02</strong> Seven-Pillar Compliance Scoring</span>
+      <span><strong>03</strong> Immutable Executive Audit Ledger</span>
+    </div>
   </div>
-</div>
+</section>
 {% endblock %}
 
+{% block content %}
+<!-- Editorial Manifesto & 4 Core Governance Pillars -->
+<section class="editorial-section">
+  <div class="editorial-split">
+    <div>
+      <span class="section-kicker">The Editorial Standard</span>
+      <h2 class="section-heading">Quiet rigor for every word, claim, and visual asset.</h2>
+      <p style="color: var(--text-muted); font-size: 0.98rem; line-height: 1.75; margin-bottom: 1.5rem;">
+        Every campaign brief, product flyer, deck, and visual release passes through a structured, transparent inspection against {{ brand_name }}&rsquo;s curated brand house rules.
+      </p>
+      <a href="{{ url_for('auth.login') }}" class="btn btn-primary">Enter the Review Space &rarr;</a>
+    </div>
+
+    <ul class="pillar-list">
+      <li class="pillar-item">
+        <span class="pillar-num">01</span>
+        <div>
+          <h4>Words &amp; House Terminology</h4>
+          <p>Flags retired codenames, unauthorized slang, and casing drift before copy reaches print or press.</p>
+        </div>
+      </li>
+      <li class="pillar-item">
+        <span class="pillar-num">02</span>
+        <div>
+          <h4>Verified Facts &amp; Pricing</h4>
+          <p>Cross-checks quoted pricing, warranty policies, and specifications directly against approved records.</p>
+        </div>
+      </li>
+      <li class="pillar-item">
+        <span class="pillar-num">03</span>
+        <div>
+          <h4>Truthful Promises &amp; Compliance</h4>
+          <p>Intercepts absolute guarantees, unverified medical or financial promises, and missing disclosures.</p>
+        </div>
+      </li>
+      <li class="pillar-item">
+        <span class="pillar-num">04</span>
+        <div>
+          <h4>Tone, Palette &amp; Accessibility</h4>
+          <p>Audits voice composure, dominant image palette fidelity, and WCAG alt-text completeness.</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- Role Access Society Cards -->
+<section class="editorial-section">
+  <div style="max-width: 640px; margin-bottom: 2.25rem;">
+    <span class="section-kicker">The Governance Society</span>
+    <h2 class="section-heading">Three dedicated roles, one unbroken line of accountability.</h2>
+    <p style="color: var(--text-muted); font-size: 0.96rem;">
+      Select a membership portal below to explore BrandGuard AI with pre-configured demo credentials.
+    </p>
+  </div>
+
+  <div class="grid-3">
+    <a href="{{ url_for('auth.login', role='creator') }}" class="society-card" aria-label="Sign in as Creator">
+      <div>
+        <div class="society-card-num">01 &bull; Creator Desk</div>
+        <h3>Creators Write &amp; Refine</h3>
+        <p>Submit campaign copy, multi-page documents, or visual assets. Receive exact page-level guidance on terminology, tone, and factual accuracy.</p>
+      </div>
+      <span class="society-card-cta">
+        <span>Try Creator Demo</span>
+        <span aria-hidden="true">&rarr;</span>
+      </span>
+    </a>
+
+    <a href="{{ url_for('auth.login', role='reviewer') }}" class="society-card" aria-label="Sign in as Reviewer">
+      <div>
+        <div class="society-card-num">02 &bull; Review Board</div>
+        <h3>Reviewers Guard the Standard</h3>
+        <p>Inspect queued work with built-in safeguards. Block serious violations, approve clean drafts, or record justified executive exceptions.</p>
+      </div>
+      <span class="society-card-cta">
+        <span>Try Reviewer Demo</span>
+        <span aria-hidden="true">&rarr;</span>
+      </span>
+    </a>
+
+    <a href="{{ url_for('auth.login', role='manager') }}" class="society-card" aria-label="Sign in as Manager">
+      <div>
+        <div class="society-card-num">03 &bull; Brand Stewardship</div>
+        <h3>Managers Curate &amp; Audit</h3>
+        <p>Maintain house guidelines, approved facts, custom reviewer directives, team privileges, and exportable compliance reports.</p>
+      </div>
+      <span class="society-card-cta">
+        <span>Try Manager Demo</span>
+        <span aria-hidden="true">&rarr;</span>
+      </span>
+    </a>
+  </div>
+</section>
+
+<!-- 6-Stage Protocol Strip -->
+<section class="editorial-section">
+  <span class="section-kicker">The Review Protocol</span>
+  <h2 class="section-heading">Six deliberate steps from draft to archival approval.</h2>
+
+  <div class="protocol-grid">
+    <div class="protocol-step">
+      <div class="protocol-step-num">01</div>
+      <div class="protocol-step-title">Add Content</div>
+      <p>Paste copy or upload PDF, DOCX, PPTX, XLSX, CSV, or images.</p>
+    </div>
+    <div class="protocol-step">
+      <div class="protocol-step-num">02</div>
+      <div class="protocol-step-title">Read It</div>
+      <p>Extract pages, tables, key pricing, dates, and palette data.</p>
+    </div>
+    <div class="protocol-step">
+      <div class="protocol-step-num">03</div>
+      <div class="protocol-step-title">Check It</div>
+      <p>Evaluate against house rules and 20 trained governance checks.</p>
+    </div>
+    <div class="protocol-step">
+      <div class="protocol-step-num">04</div>
+      <div class="protocol-step-title">Show Issues</div>
+      <p>Inspect highlighted passages with one-click editorial fixes.</p>
+    </div>
+    <div class="protocol-step">
+      <div class="protocol-step-num">05</div>
+      <div class="protocol-step-title">Review</div>
+      <p>Independent reviewer approves, rejects, or logs an exception.</p>
+    </div>
+    <div class="protocol-step">
+      <div class="protocol-step-num">06</div>
+      <div class="protocol-step-title">Save &amp; Keep</div>
+      <p>Archive immutable decisions and export PDF/Excel dossiers.</p>
+    </div>
+  </div>
+</section>
+{% endblock %}

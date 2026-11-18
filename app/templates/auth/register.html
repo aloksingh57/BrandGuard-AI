@@ -3,17 +3,23 @@
 {% block title %}Register - {{ app_name }}{% endblock %}
 
 {% block content %}
-<div style="max-width: 480px; margin: 2rem auto;">
+<div class="auth-shell">
+  <div style="text-align: center; margin-bottom: 1.75rem;">
+    <span class="section-kicker">Membership Registration</span>
+    <h1>Create Your Account</h1>
+    <p style="color: var(--text-muted); font-size: 0.94rem;">Join {{ brand_name }}&rsquo;s editorial governance workspace.</p>
+  </div>
+
   <div class="card">
     <div class="card-header">
       <a href="{{ url_for('auth.register') }}" class="icon-heading-link" title="Click to refresh registration">
-        <h2>✨ Create Your Account</h2>
+        <h2>Register</h2>
       </a>
       <span class="badge badge-info">Role: Creator</span>
     </div>
-    
-    <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.25rem;">
-      New accounts join as <strong>Creator</strong> by default. A team Manager can assign Reviewer or Manager roles from the Users panel.
+
+    <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 1.35rem;">
+      New accounts join as <strong>Creator</strong> by default. A team Manager can assign Reviewer or Manager roles from the Team panel.
     </p>
 
     <form method="POST" action="{{ url_for('auth.register') }}" novalidate>
@@ -52,13 +58,12 @@
         {% endfor %}
       </div>
 
-      <button type="submit" class="btn btn-primary" style="width: 100%;">Create Account</button>
+      <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.78rem 1.4rem;">Create Account &rarr;</button>
     </form>
 
-    <div style="margin-top: 1.25rem; text-align: center; font-size: 0.9rem; color: var(--text-muted);">
+    <div style="margin-top: 1.35rem; text-align: center; font-size: 0.9rem; color: var(--text-muted);">
       Already have an account? <a href="{{ url_for('auth.login') }}">Sign In</a>
     </div>
   </div>
 </div>
 {% endblock %}
-

@@ -139,6 +139,12 @@ class ContentVersion(db.Model):
     def page_data(self, data: list):
         self.page_data_json = json.dumps(data)
 
+    def set_page_data(self, data: list):
+        self.page_data = data
+
+    def get_page_data(self) -> list:
+        return self.page_data
+
     @property
     def category_scores(self) -> dict:
         if not self.category_scores_json:

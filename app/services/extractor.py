@@ -197,6 +197,7 @@ def _extract_docx_pages(file_path: str) -> Tuple[str, List[Dict[str, Any]]]:
                     page_index += 1
                     current_paragraphs = []
                 current_heading = text
+                current_paragraphs.append(text)
             else:
                 current_paragraphs.append(text)
 
@@ -411,6 +412,19 @@ def _extract_raw_text_pages(text: str, title: str = "Document Text") -> Tuple[st
     clean_text = (text or "").strip()
     if not clean_text:
         return "", [{'page_number': 1, 'heading': title, 'text': "", 'tables': []}]
+
+    # Support explicit form-feed (\x0c) page breaks first
+    if '\x0c' in clean_text:
+        raw_sections = [s.strip() for s in clean_text.split('\x0c') if s.strip()]
+        pages = []
+        for idx, sec in enumerate(raw_sections, 1):
+            pages.append({
+                'page_number': idx,
+                'heading': f"Page {idx}" if len(raw_sections) > 1 else title,
+                'text': sec,
+                'tables': []
+            })
+        return clean_text, pages
 
     # Chunk into pages of ~250-350 words, preserving paragraph boundaries
     paragraphs = [p.strip() for p in clean_text.split('\n\n') if p.strip()]

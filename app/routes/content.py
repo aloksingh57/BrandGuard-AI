@@ -400,7 +400,7 @@ def record_decision(content_id):
 
 @content_bp.route('/<int:content_id>/issue/<int:issue_id>/accept', methods=['POST'])
 @login_required
-def accept_suggestion(content_id):
+def accept_suggestion(content_id, issue_id):
     content = db.session.get(Content, content_id)
     if not content:
         return jsonify({'error': 'Content not found'}), 404
@@ -444,7 +444,7 @@ def accept_suggestion(content_id):
 
 @content_bp.route('/<int:content_id>/issue/<int:issue_id>/reject', methods=['POST'])
 @login_required
-def reject_suggestion(content_id):
+def reject_suggestion(content_id, issue_id):
     content = db.session.get(Content, content_id)
     if not content:
         return jsonify({'error': 'Content not found'}), 404
@@ -477,7 +477,7 @@ def reject_suggestion(content_id):
 
 @content_bp.route('/<int:content_id>/issue/<int:issue_id>/edit', methods=['POST'])
 @login_required
-def edit_suggestion(content_id):
+def edit_suggestion(content_id, issue_id):
     content = db.session.get(Content, content_id)
     if not content:
         return jsonify({'error': 'Content not found'}), 404
@@ -495,10 +495,14 @@ def edit_suggestion(content_id):
         return jsonify({'error': 'Correction text cannot be empty'}), 400
 
     curr_text = version.current_text
-    if issue.snippet in curr_text:
+    if issue.snippet and issue.snippet in curr_text:
         version.corrected_text = curr_text.replace(issue.snippet, custom_text)
-    elif issue.snippet.strip("...") in curr_text:
+    elif issue.snippet and issue.snippet.strip("...") in curr_text:
         version.corrected_text = curr_text.replace(issue.snippet.strip("..."), custom_text)
+    elif issue.improved_text and issue.improved_text in curr_text:
+        version.corrected_text = curr_text.replace(issue.improved_text, custom_text)
+    else:
+        version.corrected_text = (curr_text + "\n" + custom_text).strip() if curr_text else custom_text
 
     issue.improved_text = custom_text
     issue.status = 'Modified'
@@ -525,7 +529,7 @@ def edit_suggestion(content_id):
 
 @content_bp.route('/<int:content_id>/issue/<int:issue_id>/comment', methods=['POST'])
 @login_required
-def comment_issue(content_id):
+def comment_issue(content_id, issue_id):
     content = db.session.get(Content, content_id)
     if not content:
         return jsonify({'error': 'Content not found'}), 404
@@ -572,7 +576,8 @@ def export_original(content_id):
         )
     else:
         # Return plain text file
-        buffer = io.BytesIO((version.raw_text or "").encode('utf-8'))
+        original_body = version.raw_text or version.extracted_text or ""
+        buffer = io.BytesIO(original_body.encode('utf-8'))
         return send_file(
             buffer,
             as_attachment=True,

@@ -24,10 +24,10 @@ python seed.py
 # To wipe and recreate from scratch:
 python seed.py --reset
 
-# 3. Start the application
+# 3. Start the application (runs on port 3000 by default)
 python app.py
 ```
-Open your browser at **`http://localhost:5000`**.
+Open your browser at **`http://localhost:3000`**.
 
 ---
 
@@ -119,7 +119,7 @@ SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', "postgresql+psycopg2://brand
 
 1. **WSGI Server:** Run behind a production WSGI server like Gunicorn:
    ```bash
-   gunicorn --workers 4 --bind 0.0.0.0:8000 "app:create_app()"
+   gunicorn --workers 4 --bind 0.0.0.0:3000 wsgi:app
    ```
 2. **Reverse Proxy:** Terminate SSL/TLS with Nginx or Cloudflare, and set `ProxyFix` middleware in Flask for accurate remote IP logging in the audit service.
 3. **Storage:** In production clusters, configure `UPLOAD_FOLDER` to point to an S3/GCS bucket or persistent network volume.

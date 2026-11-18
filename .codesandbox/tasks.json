@@ -1,0 +1,26 @@
+{
+  "setupTasks": [
+    {
+      "name": "Install Python Dependencies",
+      "command": "pip install -r requirements.txt"
+    },
+    {
+      "name": "Seed Demo Database",
+      "command": "python seed.py"
+    }
+  ],
+  "tasks": {
+    "start": {
+      "name": "Start BrandGuard AI (Port 3000)",
+      "command": "PORT=3000 python app.py",
+      "runAtStart": true,
+      "preview": {
+        "port": 3000
+      }
+    },
+    "test": {
+      "name": "Run Test Suite",
+      "command": "pytest -v"
+    }
+  }
+}

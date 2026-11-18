@@ -82,11 +82,13 @@ def run_brand_check(
                 return
 
         issues.append({
+            'issue_id': f"ISS-{len(issues) + 1:03d}",
             'category': cat,
             'severity': sev,
             'rule_id': r_id,
             'snippet': snip,
             'why_it_matters': why,
+            'explanation': why,
             'suggestion': sugg,
             'mistake_type': m_type,
             'improved_text': improved or sugg,
